@@ -1,21 +1,59 @@
 'use strict';
-
-let money=prompt("Ваш бюджет на месяц?");
+let money=+prompt("Ваш бюджет на месяц?");
+var a,b;
 var time=prompt("Введите дату в формате YYYY-MM-DD");
 var appData ={
-    money1:money,
+    budget:money,
     timeData: time,
     expenses:{},
     optionalExpenses:{},
     income:[],
     savings: false
  };
-var q1=prompt("Введите обязательную статью расходов в этом месяце");
-var quest1=prompt('Во сколько обойдется?');
-var q2=prompt("Введите обязательную статью расходов в этом месяце");
-var quest2=prompt('Во сколько обойдется?');
-appData.expenses[q1]=quest1;
-appData.expenses[q2]=quest2;
-alert('бюджет на день-'+money/30+'дол.');
+for (let i=0; i<2; i++){
+    a=prompt("Введите обязательную статью расходов в этом месяце");
+    b=prompt('Во сколько обойдется?');  
+    if ((typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null 
+       && a != "" && b != "" && a.length < 50) {
+       appData.expenses[a]=b;
+    } else { 
+        i--;
+    } 
+};
+/*let i=0;
+do {a=prompt("Введите обязательную статью расходов в этом месяце");
+    b=prompt('Во сколько обойдется?');  
+    if ((typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null 
+       && a != "" && b != "" && a.length < 50) {
+       appData.expenses[a]=b;
+       i++;
+    } 
+  
+} while(i<2);*/
+
+/*let i=0;
+while (i < 2) {
+    a=prompt("Введите обязательную статью расходов в этом месяце");
+    b=prompt('Во сколько обойдется?');  
+    if ((typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null 
+        && a != "" && b != "" && a.length < 50) {
+        appData.expenses[a]=b;
+        i++;
+    } 
+};*/
+
+appData.moneyPerDay=appData.budget/30;
+alert('бюджет на день-'+appData.moneyPerDay/30+'дол.');
+
+if(appData.moneyPerDay < 200){
+    console.log("мало");
+} else if (appData.moneyPerDay >= 200 && appData.moneyPerDay <2000 ){
+    console.log("средне");
+} else if (appData.moneyPerDay >= 2000){
+    console.log("великолепно");
+}
+
 console.log(appData);
-console.log(appData.expenses);
+
+
+
